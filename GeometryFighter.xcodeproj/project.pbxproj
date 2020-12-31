@@ -12,6 +12,8 @@
 		55E725F1259D24C5006AD98D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E725EF259D24C5006AD98D /* Main.storyboard */; };
 		55E725F3259D24C8006AD98D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E725F2259D24C8006AD98D /* Assets.xcassets */; };
 		55E72606259D491D006AD98D /* AppIcon in Resources */ = {isa = PBXBuildFile; fileRef = 55E72605259D491D006AD98D /* AppIcon */; };
+		55E72609259E3E22006AD98D /* GeometryFighter.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E72608259E3E22006AD98D /* GeometryFighter.scnassets */; };
+		55E72610259E534E006AD98D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E7260F259E534E006AD98D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		55E725F2259D24C8006AD98D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55E725F4259D24C8006AD98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55E72605259D491D006AD98D /* AppIcon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon; sourceTree = "<group>"; };
+		55E72608259E3E22006AD98D /* GeometryFighter.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = GeometryFighter.scnassets; sourceTree = "<group>"; };
+		55E7260F259E534E006AD98D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 		55E725E8259D24C5006AD98D /* GeometryFighter */ = {
 			isa = PBXGroup;
 			children = (
+				55E7260F259E534E006AD98D /* LaunchScreen.storyboard */,
+				55E72608259E3E22006AD98D /* GeometryFighter.scnassets */,
 				55E725E9259D24C5006AD98D /* AppDelegate.swift */,
 				55E725ED259D24C5006AD98D /* GameViewController.swift */,
 				55E725EF259D24C5006AD98D /* Main.storyboard */,
@@ -124,6 +130,8 @@
 				55E72606259D491D006AD98D /* AppIcon in Resources */,
 				55E725F3259D24C8006AD98D /* Assets.xcassets in Resources */,
 				55E725F1259D24C5006AD98D /* Main.storyboard in Resources */,
+				55E72610259E534E006AD98D /* LaunchScreen.storyboard in Resources */,
+				55E72609259E3E22006AD98D /* GeometryFighter.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

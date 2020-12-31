@@ -34,6 +34,9 @@ class GameViewController: UIViewController {
     func setupScene() {
       scnScene = SCNScene()
       scnView.scene = scnScene
+        
+      scnScene.background.contents = "GeometryFighter.scnassets/Textures/Background_Diffuse.png"
+
     }
 
 }
