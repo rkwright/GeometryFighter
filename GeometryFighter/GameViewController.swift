@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
     setupCamera()
     
     //spawnShape()
+    emitParticles()
   }
 
   override var shouldAutorotate: Bool {
@@ -44,6 +45,8 @@ class GameViewController: UIViewController {
 
         scnView.delegate = self
 
+        scnView.isPlaying = true
+        
     }
 
     func setupScene() {
@@ -126,6 +129,54 @@ class GameViewController: UIViewController {
 
         scnScene.rootNode.addChildNode(shapeNode)
     }
+    
+    func cleanScene() {
+      // 1
+      for node in scnScene.rootNode.childNodes {
+        // 2
+        if node.presentation.position.y < -2 {
+          // 3
+          node.removeFromParentNode()
+        }
+      }
+    }
+    
+    func emitParticles() {
+        scnView = self.view as! SCNView
+
+        //let rectangle = CGRect(x: 0, y: 0, width: 1000, height: 200)
+        //let sceneView = SCNView(frame: rectangle)
+
+        //let scene = SCNScene()
+        //sceneView.scene = scene
+        //sceneView.backgroundColor = .black
+
+        //let cameraNode = SCNNode()
+        //cameraNode.camera = SCNCamera()
+        //cameraNode.position.z = 70
+        //sceneView.scene!.rootNode.addChildNode(cameraNode)
+
+        let particleSystem = SCNParticleSystem()
+        particleSystem.birthRate = 5000
+        particleSystem.particleLifeSpan = 1
+        particleSystem.warmupDuration = 1
+        particleSystem.emissionDuration = 100.0
+        particleSystem.loops = false
+        particleSystem.particleColor = .cyan
+        particleSystem.birthDirection = .random
+        //particleSystem.speedFactor = 7
+        particleSystem.emittingDirection = SCNVector3(0,1,1)
+        particleSystem.emitterShape = .some(SCNSphere(radius: 15.0))
+        particleSystem.spreadingAngle = 90
+        particleSystem.particleImage = "star"
+
+        let particlesNode = SCNNode()
+        //particlesNode.scale = SCNVector3(2,2,2)
+        particlesNode.addParticleSystem(particleSystem)
+        
+        scnView.scene!.rootNode.addChildNode(particlesNode)
+    }
+
 }
 
 
@@ -134,6 +185,8 @@ extension GameViewController: SCNSceneRendererDelegate {
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     
     if time > spawnTime {
+        
+        cleanScene()
       spawnShape()
 
       spawnTime = time + TimeInterval(Float.random(min: 0.2, max: 1.5))
