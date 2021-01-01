@@ -63,19 +63,45 @@ class GameViewController: UIViewController {
     }
 
     func spawnShape() {
-      // 1
-      var geometry:SCNGeometry
-      // 2
+      
+        var shapeNode:SCNNode
+      
       switch ShapeType.random() {
-      default:
-        // 3
-        geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0,
-          chamferRadius: 0.0)
-      }
-      // 4
-      let geometryNode = SCNNode(geometry: geometry)
-      // 5
-      scnScene.rootNode.addChildNode(geometryNode)
+        
+        case ShapeType.sphere:
+            let sphere = SCNSphere(radius: 1.0)
+            shapeNode = SCNNode(geometry: sphere)
+
+        case ShapeType.pyramid:
+            let pyra = SCNPyramid(width: 1.0, height:1.0, length:1.0)
+            shapeNode = SCNNode(geometry: pyra)
+            
+        case ShapeType.torus:
+            let tor = SCNTorus(ringRadius: 1.0, pipeRadius:1.0)
+            shapeNode = SCNNode(geometry: tor)
+            
+        case ShapeType.capsule:
+            let caps = SCNCapsule(capRadius: 1.0, height:1.0)
+            shapeNode = SCNNode(geometry: caps)
+            
+        case ShapeType.cylinder:
+            let tor = SCNCylinder(radius: 1.0, height:1.0)
+            shapeNode = SCNNode(geometry: tor)
+            
+        case ShapeType.cone:
+            let con = SCNCone(topRadius: 0.2, bottomRadius:1.0, height:1.0)
+            shapeNode = SCNNode(geometry: con)
+            
+        case ShapeType.tube:
+            let tub = SCNTube(innerRadius: 0.5, outerRadius:1.0, height:1.0)
+            shapeNode = SCNNode(geometry: tub)
+
+        default:           // default is a ShapeType.box
+            let box = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
+            shapeNode = SCNNode(geometry: box)
+     }
+            
+      scnScene.rootNode.addChildNode(shapeNode)
     }
 
 }
