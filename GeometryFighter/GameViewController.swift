@@ -89,7 +89,7 @@ class GameViewController: UIViewController {
             shapeNode = SCNNode(geometry: tor)
             
         case ShapeType.cone:
-            let con = SCNCone(topRadius: 0.2, bottomRadius:1.0, height:1.0)
+            let con = SCNCone(topRadius: 0.0, bottomRadius:1.0, height:1.0)
             shapeNode = SCNNode(geometry: con)
             
         case ShapeType.tube:
@@ -101,6 +101,8 @@ class GameViewController: UIViewController {
             shapeNode = SCNNode(geometry: box)
      }
             
+      shapeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+
       scnScene.rootNode.addChildNode(shapeNode)
     }
 
