@@ -70,7 +70,6 @@
 		55E725DD259D24C5006AD98D = {
 			isa = PBXGroup;
 			children = (
-				55E72605259D491D006AD98D /* AppIcon */,
 				55E725E8259D24C5006AD98D /* GeometryFighter */,
 				55E725E7259D24C5006AD98D /* Products */,
 			);
@@ -87,6 +86,7 @@
 		55E725E8259D24C5006AD98D /* GeometryFighter */ = {
 			isa = PBXGroup;
 			children = (
+				55E72605259D491D006AD98D /* AppIcon */,
 				5563CB54259FADEB0053D163 /* Particles */,
 				55E7FD93259F9D2800B3A639 /* GameUtils */,
 				55E7260F259E534E006AD98D /* LaunchScreen.storyboard */,
