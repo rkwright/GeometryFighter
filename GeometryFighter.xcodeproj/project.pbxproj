@@ -60,6 +60,7 @@
 		5563CB54259FADEB0053D163 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				5563CB59259FC0600053D163 /* star.png */,
 				5563CB56259FBF870053D163 /* ParticlesScene.scn */,
 			);
 			path = Particles;
@@ -93,7 +94,6 @@
 				55E7FD7F259F7B4500B3A639 /* ShapeType.swift */,
 				55E725EF259D24C5006AD98D /* Main.storyboard */,
 				55E725F2259D24C8006AD98D /* Assets.xcassets */,
-				5563CB59259FC0600053D163 /* star.png */,
 				55E725F4259D24C8006AD98D /* Info.plist */,
 			);
 			path = GeometryFighter;

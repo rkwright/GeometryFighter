@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
         setupCamera()
         
        // createTrail(color: <#T##UIColor#>, geometry: <#T##SCNGeometry#>)
-        //spawnShape()
+        
         emitParticles()
     }
     
