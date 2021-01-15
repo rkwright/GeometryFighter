@@ -13,7 +13,6 @@
 		55E725EE259D24C5006AD98D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E725ED259D24C5006AD98D /* GameViewController.swift */; };
 		55E725F1259D24C5006AD98D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E725EF259D24C5006AD98D /* Main.storyboard */; };
 		55E725F3259D24C8006AD98D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E725F2259D24C8006AD98D /* Assets.xcassets */; };
-		55E72606259D491D006AD98D /* AppIcon in Resources */ = {isa = PBXBuildFile; fileRef = 55E72605259D491D006AD98D /* AppIcon */; };
 		55E72609259E3E22006AD98D /* GeometryFighter.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E72608259E3E22006AD98D /* GeometryFighter.scnassets */; };
 		55E72610259E534E006AD98D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E7260F259E534E006AD98D /* LaunchScreen.storyboard */; };
 		55E7FD80259F7B4500B3A639 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7FD7F259F7B4500B3A639 /* ShapeType.swift */; };
@@ -35,7 +34,6 @@
 		55E725F0259D24C5006AD98D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55E725F2259D24C8006AD98D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55E725F4259D24C8006AD98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55E72605259D491D006AD98D /* AppIcon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon; sourceTree = "<group>"; };
 		55E72608259E3E22006AD98D /* GeometryFighter.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = GeometryFighter.scnassets; sourceTree = "<group>"; };
 		55E7260F259E534E006AD98D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55E7FD7F259F7B4500B3A639 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 		55E725E8259D24C5006AD98D /* GeometryFighter */ = {
 			isa = PBXGroup;
 			children = (
-				55E72605259D491D006AD98D /* AppIcon */,
 				5563CB54259FADEB0053D163 /* Particles */,
 				55E7FD93259F9D2800B3A639 /* GameUtils */,
 				55E7260F259E534E006AD98D /* LaunchScreen.storyboard */,
@@ -173,7 +170,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E72606259D491D006AD98D /* AppIcon in Resources */,
 				55E725F3259D24C8006AD98D /* Assets.xcassets in Resources */,
 				55E725F1259D24C5006AD98D /* Main.storyboard in Resources */,
 				5563CB57259FBF880053D163 /* ParticlesScene.scn in Resources */,

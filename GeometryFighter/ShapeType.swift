@@ -7,7 +7,6 @@
 
 import Foundation
 
-// 1
 enum ShapeType:Int {
 
   case box = 0
@@ -19,7 +18,6 @@ enum ShapeType:Int {
   case cone
   case tube
 
-  // 2
   static func random() -> ShapeType {
     let maxValue = tube.rawValue
     let rand = arc4random_uniform(UInt32(maxValue+1))

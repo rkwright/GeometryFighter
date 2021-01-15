@@ -26,6 +26,9 @@ class GameViewController: UIViewController {
         emitParticles()
     }
     
+    /**
+     * Set up the view configuration
+     */
     func setupView() {
         scnView = self.view as? SCNView
         
@@ -71,7 +74,6 @@ class GameViewController: UIViewController {
         var shapeNode:SCNNode
         var geomNode: SCNGeometry;
        
-        
         switch ShapeType.random() {
             
             case ShapeType.sphere:
