@@ -26,14 +26,6 @@ class GameViewController: UIViewController {
         emitParticles()
     }
     
-    override var shouldAutorotate: Bool {
-        return true
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     func setupView() {
         scnView = self.view as? SCNView
         
@@ -49,6 +41,9 @@ class GameViewController: UIViewController {
         
     }
     
+    /**
+     * Just set up our scene and add the background png to it
+     */
     func setupScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
@@ -74,50 +69,39 @@ class GameViewController: UIViewController {
     func spawnShape() {
         
         var shapeNode:SCNNode
+        var geomNode: SCNGeometry;
+       
         
         switch ShapeType.random() {
             
             case ShapeType.sphere:
-                let sphere = SCNSphere(radius: 1.0)
-                shapeNode = SCNNode(geometry: sphere)
-                sphere.materials.first?.diffuse.contents = UIColor.random()
-                
+                geomNode = SCNSphere(radius: 1.0)
+ 
             case ShapeType.pyramid:
-                let pyra = SCNPyramid(width: 1.0, height:1.0, length:1.0)
-                shapeNode = SCNNode(geometry: pyra)
-                pyra.materials.first?.diffuse.contents = UIColor.random()
-                
+                geomNode = SCNPyramid(width: 1.0, height:1.0, length:1.0)
+           
             case ShapeType.torus:
-                let tor = SCNTorus(ringRadius: 1.0, pipeRadius:1.0)
-                shapeNode = SCNNode(geometry: tor)
-                tor.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNTorus(ringRadius: 1.0, pipeRadius:1.0)
                 
             case ShapeType.capsule:
-                let caps = SCNCapsule(capRadius: 1.0, height:1.0)
-                shapeNode = SCNNode(geometry: caps)
-                caps.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNCapsule(capRadius: 1.0, height:1.0)
                 
             case ShapeType.cylinder:
-                let cyl = SCNCylinder(radius: 1.0, height:1.0)
-                shapeNode = SCNNode(geometry: cyl)
-                cyl.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNCylinder(radius: 1.0, height:1.0)
                 
             case ShapeType.cone:
-                let con = SCNCone(topRadius: 0.0, bottomRadius:1.0, height:1.0)
-                shapeNode = SCNNode(geometry: con)
-                con.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNCone(topRadius: 0.0, bottomRadius:1.0, height:1.0)
                 
             case ShapeType.tube:
-                let tub = SCNTube(innerRadius: 0.5, outerRadius:1.0, height:1.0)
-                shapeNode = SCNNode(geometry: tub)
-                tub.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNTube(innerRadius: 0.5, outerRadius:1.0, height:1.0)
                 
             default:           // default is a ShapeType.box
-                let box = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
-                shapeNode = SCNNode(geometry: box)
-                box.materials.first?.diffuse.contents = UIColor.random()
+                geomNode = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
         }
-        
+                 
+        shapeNode = SCNNode(geometry: geomNode)
+        geomNode.materials.first?.diffuse.contents = UIColor.random()
+
         shapeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
         let randomX = Float.random(min: -2, max: 2)
@@ -135,18 +119,15 @@ class GameViewController: UIViewController {
      * As each node falls off the "screen" simply delete it.
      */
     func cleanScene() {
-        // 1
         for node in scnScene.rootNode.childNodes {
-            // 2
             if node.presentation.position.y < -2 {
-                // 3
                 node.removeFromParentNode()
             }
         }
     }
     
     /*
-     *
+     * Create a particle system only with code.
      */
     func emitParticles() {
         scnView = self.view as? SCNView
@@ -166,22 +147,39 @@ class GameViewController: UIViewController {
         particleSystem.particleImage = "star"
         
         let particlesNode = SCNNode()
-        //particlesNode.scale = SCNVector3(2,2,2)
+        particlesNode.scale = SCNVector3(1,1,1)
         particlesNode.addParticleSystem(particleSystem)
         
         scnView.scene!.rootNode.addChildNode(particlesNode)
     }
     
+    /**
+     * Create the trail by loading the dummy "scn" file.
+     */
     func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
         let scene = SCNScene(named: "GeometryFighter.scnassets/Scenes/Trail.scn")
         let node:SCNNode = (scene?.rootNode.childNode(withName: "Trail", recursively: true)!)!
+
         let particleSystem:SCNParticleSystem = (node.particleSystems?.first)!
+        
         particleSystem.particleColor = color
         particleSystem.emitterShape = geometry
+        
         return particleSystem
     }
 
-}
+    /**
+     * Simple overrides
+     */
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+}  // end of class
 
 /*
  * Extension protocol so we can handle the render loop calls
