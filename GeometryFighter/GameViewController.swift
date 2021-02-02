@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     var scnScene    : SCNScene!
     var cameraNode  : SCNNode!
     var spawnTime   : TimeInterval = 0
+    var game        = GameHelper.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,15 +21,24 @@ class GameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
+        setupHUD()
         
        // createTrail(color: <#T##UIColor#>, geometry: <#T##SCNGeometry#>)
         
         emitParticles()
     }
     
-    /**
-     * Set up the view configuration
-     */
+    //
+    // Configure the HUD
+    //
+    func setupHUD() {
+        game.hudNode.position = SCNVector3(x: 0.0, y: 10.0, z: 0.0)
+        scnScene.rootNode.addChildNode(game.hudNode)
+    }
+
+    //
+    // Set up the view configuration
+    //
     func setupView() {
         scnView = self.view as? SCNView
         
@@ -44,9 +54,9 @@ class GameViewController: UIViewController {
         
     }
     
-    /**
-     * Just set up our scene and add the background png to it
-     */
+    //
+    // Just set up our scene and add the background png to it
+    //
     func setupScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
@@ -54,9 +64,9 @@ class GameViewController: UIViewController {
         scnScene.background.contents = "GeometryFighter.scnassets/Textures/Background_Diffuse.png"
     }
     
-    /*
-      * Set up a simple perspective camera
-     */
+    //
+    // Set up a simple perspective camera
+    //
     func setupCamera() {
         cameraNode = SCNNode()
         
@@ -66,9 +76,9 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    /*
-      * Generate a random shape and add it to the scene.  We'll clean up later.
-     */
+    //
+    // Generate a random shape and add it to the scene.  We'll clean up later.
+    //
     func spawnShape() {
         
         var shapeNode:SCNNode
@@ -117,9 +127,9 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(shapeNode)
     }
     
-    /*
-     * As each node falls off the "screen" simply delete it.
-     */
+    //
+    // As each node falls off the "screen" simply delete it.
+    //
     func cleanScene() {
         for node in scnScene.rootNode.childNodes {
             if node.presentation.position.y < -2 {
@@ -128,9 +138,9 @@ class GameViewController: UIViewController {
         }
     }
     
-    /*
-     * Create a particle system only with code.
-     */
+    //
+    // Create a particle system only with code.
+    //
     func emitParticles() {
         scnView = self.view as? SCNView
         
@@ -155,9 +165,9 @@ class GameViewController: UIViewController {
         scnView.scene!.rootNode.addChildNode(particlesNode)
     }
     
-    /**
-     * Create the trail by loading the dummy "scn" file.
-     */
+    //
+    // Create the trail by loading the dummy "scn" file.
+    //
     func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
         let scene = SCNScene(named: "GeometryFighter.scnassets/Scenes/Trail.scn")
         let node:SCNNode = (scene?.rootNode.childNode(withName: "Trail", recursively: true)!)!
@@ -170,9 +180,9 @@ class GameViewController: UIViewController {
         return particleSystem
     }
 
-    /**
-     * Simple overrides
-     */
+    //
+    // Simple overrides
+    //
     override var shouldAutorotate: Bool {
         return true
     }
@@ -183,9 +193,9 @@ class GameViewController: UIViewController {
     
 }  // end of class
 
-/*
- * Extension protocol so we can handle the render loop calls
- */
+//
+// Extension protocol so we can handle the render loop calls
+//
 extension GameViewController: SCNSceneRendererDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
@@ -196,6 +206,8 @@ extension GameViewController: SCNSceneRendererDelegate {
             spawnShape()
             
             spawnTime = time + TimeInterval(Float.random(min: 0.2, max: 1.5))
+            
+            game.updateHUD()
         }
         
     }
