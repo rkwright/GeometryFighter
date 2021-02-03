@@ -29,14 +29,6 @@ class GameViewController: UIViewController {
     }
     
     //
-    // Configure the HUD
-    //
-    func setupHUD() {
-        game.hudNode.position = SCNVector3(x: 0.0, y: 10.0, z: 0.0)
-        scnScene.rootNode.addChildNode(game.hudNode)
-    }
-
-    //
     // Set up the view configuration
     //
     func setupView() {
@@ -51,6 +43,8 @@ class GameViewController: UIViewController {
         scnView.delegate = self
         
         scnView.isPlaying = true
+        
+        scnView.allowsCameraControl = false
         
     }
     
@@ -77,12 +71,20 @@ class GameViewController: UIViewController {
     }
     
     //
+    // Configure the HUD
+    //
+    func setupHUD() {
+        game.hudNode.position = SCNVector3(x: 0.0, y: 10.0, z: 0.0)
+        scnScene.rootNode.addChildNode(game.hudNode)
+    }
+    
+    //
     // Generate a random shape and add it to the scene.  We'll clean up later.
     //
     func spawnShape() {
         
-        var shapeNode:SCNNode
-        var geomNode: SCNGeometry;
+        var shapeNode : SCNNode
+        var geomNode  : SCNGeometry
        
         switch ShapeType.random() {
             
@@ -112,8 +114,15 @@ class GameViewController: UIViewController {
         }
                  
         shapeNode = SCNNode(geometry: geomNode)
-        geomNode.materials.first?.diffuse.contents = UIColor.random()
-
+        let color = UIColor.random()
+        geomNode.materials.first?.diffuse.contents = color
+        
+        if color == UIColor.black {
+            shapeNode.name = "BAD"
+            } else {
+            shapeNode.name = "GOOD"
+        }
+        
         shapeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
         let randomX = Float.random(min: -2, max: 2)
@@ -161,7 +170,7 @@ class GameViewController: UIViewController {
         let particlesNode = SCNNode()
         particlesNode.scale = SCNVector3(1,1,1)
         particlesNode.addParticleSystem(particleSystem)
-        
+                
         scnView.scene!.rootNode.addChildNode(particlesNode)
     }
     
@@ -180,6 +189,35 @@ class GameViewController: UIViewController {
         return particleSystem
     }
 
+    //
+    // Our logic for the touch handler
+    //
+    func handleTouchFor(node: SCNNode) {
+        if node.name == "GOOD" {
+            game.score += 1
+            node.removeFromParentNode()
+        } else if node.name == "BAD" {
+            game.lives -= 1
+            node.removeFromParentNode()
+        }
+    }
+    
+    //
+    // Our handler for touches on the screen
+    //
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Get the first touch (could be multiple if more than one finger used)
+        let touch = touches.first!
+        // transform into the coordinate space of our view
+        let location = touch.location(in: scnView)
+        // shoot a ray from the camera (?) location to where the user touched
+        let hitResults = scnView.hitTest(location, options: nil)
+        // if there are any results, call out to the touch handler
+        if let result = hitResults.first {
+            handleTouchFor(node: result.node)
+        }
+    }
+    
     //
     // Simple overrides
     //
