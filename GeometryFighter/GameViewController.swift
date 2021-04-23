@@ -235,19 +235,19 @@ class GameViewController: UIViewController {
 // Extension protocol so we can handle the render loop calls
 //
 extension GameViewController: SCNSceneRendererDelegate {
+
+func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+
+if time > spawnTime {
     
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
-        if time > spawnTime {
-            
-            cleanScene()
-            spawnShape()
-            
-            spawnTime = time + TimeInterval(Float.random(min: 0.2, max: 1.5))
-            
-            game.updateHUD()
-        }
-        
-    }
+    cleanScene()
+    spawnShape()
+    
+    spawnTime = time + TimeInterval(Float.random(min: 0.2, max: 1.5))
+    
+    game.updateHUD()
+}
+
+}
 }
 
